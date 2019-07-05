@@ -1,0 +1,35 @@
+/**
+ * projet   : LegaChat
+ * version  : 0.1-a
+ * date     : 5/07/2019
+ * file     : main.css
+ * location : /front/css/
+ * author   : Anarchy
+ */
+
+* {
+	font-family: monospace;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	background: url('../assets/bg.jpeg') center no-repeat;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+}
+
+#grid {
+	background: url('../assets/bg.jpeg') no-repeat fixed;
+	background-size: cover;
+	display: none;
+	position: fixed;
+	z-index: -1;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+}
+

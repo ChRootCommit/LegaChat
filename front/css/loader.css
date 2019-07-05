@@ -1,0 +1,35 @@
+/**
+ * projet   : LegaChat
+ * version  : 0.1-a
+ * date     : 5/07/2019
+ * file     : loader.css
+ * location : /front/css/
+ * author   : Anarchy
+ */
+
+#loader {
+	display: none;
+	height: 100%;
+	position: fixed;
+	width: 100%;
+	z-index: 2;
+}
+
+#loader #contentLoader,
+#loader #statusLoader {
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#loader #statusLoader {
+	display: none;
+	transform: translate(-50%, 5em);
+}
+#loader #statusLoader::first-letter { text-transform: capitalize; }
+
+
+/**
+ * END
+ */
