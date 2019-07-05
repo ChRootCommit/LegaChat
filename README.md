@@ -1,0 +1,2 @@
+# LegaChat
+IRC Chat Legacy
