@@ -8,6 +8,7 @@
  */
 
 #loader {
+	background: rgb(0, 0, 0, .9);
 	display: none;
 	height: 100%;
 	position: fixed;
@@ -24,7 +25,10 @@
 }
 
 #loader #statusLoader {
+	color: #EEEEEE;
 	display: none;
+	font-size: 1.25em;
+	text-align: center;
 	transform: translate(-50%, 5em);
 }
 #loader #statusLoader::first-letter { text-transform: capitalize; }

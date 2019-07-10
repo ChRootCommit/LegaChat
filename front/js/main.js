@@ -7,9 +7,11 @@
  * author   : Anarchy
  */
 
+var title = 'LegaChat';
+
 class background {
 	static grid(ct) {
-		if(!ct) { var ct = 'light'; }
+		if(!ct) var ct = 'light';
 		const theme = {
 			light: {
 				bg: "rgba(255, 255, 255, .15)",
@@ -20,23 +22,23 @@ class background {
 				gd: ["rgba(255, 255, 255, .05)", "rgba(255, 255, 255, .025)"]
 			}
 		}
-		
+
 		var ctx = $("#grid")[0].getContext("2d"),
 			obj = Array(50, 10),
 			ratio = {
 				x: [window.innerWidth/obj[0], window.innerWidth/obj[1]],
 				y: [window.innerHeight/obj[0], window.innerHeight/obj[1]]
 			};
-		
+
 		ctx.canvas.height = window.innerHeight;
 		ctx.canvas.width = window.innerWidth;
 		ctx.fillStyle = theme[ct].bg;
 		ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
-		
+
 		ctx.lineWidth = 2;
 		ctx.lineCap = 'square';
 		ctx.setLineDash([2, 8]);
-		
+
 		for(let k = 0; k < 2; k++) {
 			for(let i = 0; i < ratio.y[k]; i++) {
 				for(let j = 0; j < ratio.x[k]; j++) {
@@ -45,7 +47,7 @@ class background {
 				}
 			}
 		}
-		
+
 		$("#grid").fadeIn();
 	}
 }
@@ -53,7 +55,7 @@ class background {
 class loader {
 	constructor() {
 		var cl = new CanvasLoader('contentLoader');
-		cl.setColor('#EE0000');
+		cl.setColor('#EEEEEE');
 		cl.setShape('spiral');
 		cl.setDiameter(100);
 		cl.setDensity(100);
@@ -89,10 +91,32 @@ class loader {
 }
 
 $(document).ready(() => {
-	new loader();
 	background.grid();
-	
-	$.ajax({
-		url: './'
-	})
+
+	new loader();
+	loader.status('Chargement des ressources');
+	$('title').html(`${title} | Loading_`);
+
+	setTimeout(() => {
+		$.ajax({
+			type: 'POST',
+			url: './?process=checking',
+			dataType: 'json',
+			success: result => {
+				if(result.passed) {
+					loader.status('Chargement des composants du chat');
+					$('title').html(`${title} | Connecting_`);
+					$('section').load('./front/views/chat.html', () => process.chat(result));
+				} else {
+					loader.status('Chargement de la page d\'authentification');
+					$('title').html(`${title} | Authentification_`);
+					$('section').load('./front/views/login.html', process.login);
+				}
+			}
+		});
+	}, 1000);
 });
+
+/**
+ * END
+ */
