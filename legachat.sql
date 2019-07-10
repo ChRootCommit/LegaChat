@@ -28,7 +28,7 @@ CREATE TABLE `msg` (
 CREATE TABLE `usr` (
   `id` int(3) NOT NULL COMMENT '[int]',
   `name` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '[char]',
-  `pass` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '[md5(char)]'
+  `pass` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '[char]'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
