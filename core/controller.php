@@ -24,22 +24,6 @@
 		$post = ['passed' => false];
 
 		switch($_GET['process']) {
-			/*case "setPassWord": // Set password user {Dev Function}
-				// JS Syntax in Xhr request:
-
-				// $.ajax({
-				//   type: 'post',
-				//   url: ./?process=setPassWord&user=USERNAME&pass=PASSWORD
-				// });
-
-				$post = [
-					'Usr' => isInput($_GET['user']),
-					'Psw' => md5(isInput($_GET['pass']))
-				];
-				$bdd->query("UPDATE usr SET pass='{$post['Psw']}' WHERE name='{$post['Usr']}'");
-				$post['passed'] = true;
-				break;*/
-
 			case "login": $post = [ // Login
 					'name'    => isInput($_POST['username']),
 					'error'   => 'incorrect !'
