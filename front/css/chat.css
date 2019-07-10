@@ -144,6 +144,7 @@
 	right: 2em;
 	width: 100%;
 }
+#chat #chatEntry textarea::placeholder { text-transform: capitalize; }
 
 #chat #chatEntry button {
 	background: transparent;
@@ -156,7 +157,4 @@
 	transition: .2s all;
 	width: 2em;
 }
-
-#chat #chatEntry button:hover {
-	background: rgba(217, 17, 17, .2);
-}
+#chat #chatEntry button:hover { background: rgba(217, 17, 17, .2); }
