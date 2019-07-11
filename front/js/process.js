@@ -9,6 +9,10 @@
 
 class process {
 	static login() {
+		/**
+		 * Login resources
+		 */
+
 		$("<link/>", {
 			rel: "stylesheet",
 			type: "text/css",
@@ -48,10 +52,20 @@ class process {
 	}
 
 	static chat(data) {
+		/**
+		 * Chat resources
+		 */
+
 		$("<link/>", {
 			rel: "stylesheet",
 			type: "text/css",
 			href: "./front/css/chat.css"
+		}).appendTo("head");
+
+		$("<script></script>", {
+			language: "javascript",
+			type: "text/javascript",
+			src: "./front/js/core.js"
 		}).appendTo("head");
 
 		$('title').html(`${title} | Connected_`);
@@ -67,18 +81,8 @@ class process {
 
 		$('#chatSpeaker').append(data.name);
 
-		Object.entries(data.chatContent).forEach((key, value) => {
-			let msg = '';
-
-			if(key[1][0] === data.name) msg += '<article class="owner">';
-			else msg += '<article>';
-
-			msg += `<p class="msgOwner">${key[1][0]}</p>`;
-			msg += `<p class="msgDate">${key[1][1]}</p>`;
-			msg += `<p class="msgContent">${key[1][2]}</p>`;
-			msg += '</article>';
-
-			$('#chatOutput').append(msg);
+		Object.entries(data.chatContent).forEach(key => {
+			core.generateMsg(key[1], data.name);
 		});
 
 		$('#chat form').submit(e => {
@@ -102,11 +106,14 @@ class process {
 		});
 
 		setTimeout(() => process.chatRefresh(data.chatContent), 200);
-		setTimeout(() => $('#chatOutput').scrollTop($('#chatOutput')[0].scrollHeight), 100);
 		setTimeout(loader.close, 1000);
 	}
 
 	static chatRefresh(chatContent) {
+		/**
+		 * Refresh Output Area when recieve event
+		 */
+
 		$.ajax({
 			type: 'POST',
 			url: './?process=checking',
@@ -118,19 +125,7 @@ class process {
 				];
 
 				if(count[0] > count[1]) {
-					let msg = '';
-
-					if(result.chatContent[count[1]][0] === result.name) msg += '<article class="owner">';
-					else msg += '<article>';
-
-					msg += `<p class="msgOwner">${result.chatContent[count[1]][0]}</p>`;
-					msg += `<p class="msgDate">${result.chatContent[count[1]][1]}</p>`;
-					msg += `<p class="msgContent">${result.chatContent[count[1]][2]}</p>`;
-					msg += '</article>';
-
-					$('#chatOutput').append(msg);
-					setTimeout(() => $('#chatOutput').scrollTop($('#chatOutput')[0].scrollHeight), 100);
-
+					core.generateMsg(result.chatContent[count[1]], result.name);
 					chatContent = result.chatContent;
 				}
 			}
