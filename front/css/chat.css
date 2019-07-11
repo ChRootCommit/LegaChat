@@ -124,6 +124,12 @@
 	padding-top: .5em;
 	word-wrap: break-word;
 }
+#chat #chatOutput article .msgContent a:hover { text-decoration: underline; }
+#chat #chatOutput article .msgContent a,
+#chat #chatOutput article .msgContent a:visited {
+	color: rgb(57, 207, 207);
+	text-decoration: none;
+}
 
 #chat #chatEntry {
 	display: block;
