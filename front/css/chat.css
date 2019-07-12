@@ -142,6 +142,7 @@
 	border: none;
 	border-top: 2px solid rgba(17, 17, 17, .6);
 	box-sizing: border-box;
+	font-size: 1em;
 	height: 4em;
 	left: 0;
 	padding: .25em 4em .25em .25em;
@@ -164,3 +165,7 @@
 	width: 2em;
 }
 #chat #chatEntry button:hover { background: rgba(217, 17, 17, .2); }
+
+/**
+ * END
+ */
