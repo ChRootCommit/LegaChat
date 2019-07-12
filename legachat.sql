@@ -19,16 +19,16 @@ CREATE TABLE `msg` (
   `idMsg` int(64) NOT NULL COMMENT '[int]',
   `idOwner` int(3) NOT NULL COMMENT '[int]',
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '[timestamp]',
-  `content` varchar(512) COLLATE utf8_unicode_ci NOT NULL COMMENT '[char]'
+  `content` varchar(512) COLLATE utf8_unicode_ci NOT NULL COMMENT '[rot13(char)]'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- Structure de la table "usr"
 
 CREATE TABLE `usr` (
-  `id` int(3) NOT NULL COMMENT '[int]',
+  `idUsr` int(3) NOT NULL COMMENT '[int]',
   `name` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '[char]',
-  `pass` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '[char]'
+  `pass` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '[md5(char)]'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -38,7 +38,7 @@ ALTER TABLE `msg`
   ADD PRIMARY KEY (`idMsg`);
 
 ALTER TABLE `usr`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`idUsr`),
   ADD UNIQUE KEY `username` (`name`);
 
 
@@ -48,7 +48,7 @@ ALTER TABLE `msg`
   MODIFY `idMsg` int(64) NOT NULL AUTO_INCREMENT COMMENT '[int]';
 
 ALTER TABLE `usr`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT COMMENT '[int]';
+  MODIFY `idUsr` int(3) NOT NULL AUTO_INCREMENT COMMENT '[int]';
 COMMIT;
 
 -- END
