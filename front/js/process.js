@@ -86,6 +86,9 @@ class process {
 		});
 
 		$('#chat form').submit(e => {
+			if($('#chat form textarea').val() === '')
+				return false;
+
 			e.preventDefault();
 			let post = $("#chat form").serialize();
 			$("#chat form")[0].reset();
@@ -98,12 +101,14 @@ class process {
 			});
 		});
 
-		$('#chat textarea').keypress(e => {
-			if(e.keyCode === 13) {
-				$('#chat form').submit();
-				setTimeout(() => $("#chat form")[0].reset(), 50);
-			}
-		});
+		$('#chat textarea')
+			.keypress(e => {
+				if(e.keyCode === 13) {
+					$('#chat form').submit();
+					setTimeout(() => $("#chat form")[0].reset(), 50);
+				}
+			})
+			.focus();
 
 		setTimeout(() => process.chatRefresh(data.chatContent), 200);
 		setTimeout(loader.close, 1000);

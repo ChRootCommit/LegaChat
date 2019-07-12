@@ -40,8 +40,6 @@ class core {
 		msg += `<p class="msgContent">${core.charToLink(data[2])}</p>`;
 		msg += '</article>';
 
-		//console.log(core.charToLink(data[2]));
-
 		$('#chatOutput').append(msg);
 		setTimeout(() => $('#chatOutput').scrollTop($('#chatOutput')[0].scrollHeight), 100);
 	}
