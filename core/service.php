@@ -20,7 +20,7 @@
 			 * Function : Fetching all messages in database
 			 */
 
-			$req = $bdd->query('SELECT msg.idOwner, msg.time, msg.content, usr.id, usr.name FROM msg, usr WHERE msg.idOwner=usr.id');
+			$req = $bdd->query('SELECT msg.idOwner, msg.time, msg.content, usr.idUsr, usr.name FROM msg, usr WHERE msg.idOwner=usr.idUsr');
 			$users = $data = [];
 
 			while($output = $req->fetch(PDO::FETCH_ASSOC)) {
@@ -62,7 +62,7 @@
 				return false;
 
 			$req = [
-				'Usr'  => $bdd->query('SELECT id, name FROM usr'),
+				'Usr'  => $bdd->query('SELECT idUsr, name FROM usr'),
 				'Send' => $bdd->prepare("INSERT INTO msg(idOwner, content) VALUES(?, ?)")
 			]; $content = str_rot13($content);
 
