@@ -20,19 +20,14 @@
 			 * Function : Fetching all messages in database
 			 */
 
-			$req = [
-				'Usr' => $bdd->query('SELECT id, name FROM usr'),
-				'Msg' => $bdd->query('SELECT idOwner, time, content FROM msg')
-			]; $users = $data = [];
+			$req = $bdd->query('SELECT msg.idOwner, msg.time, msg.content, usr.id, usr.name FROM msg, usr WHERE msg.idOwner=usr.id');
+			$users = $data = [];
 
-			while($output = $req['Usr']->fetch(PDO::FETCH_NUM))
-				array_push($users, $output);
-
-			while($output = $req['Msg']->fetch(PDO::FETCH_NUM)) {
+			while($output = $req->fetch(PDO::FETCH_ASSOC)) {
 				$output = [
-					0 => $users[$output[0]-1][1],
-					1 => date("Y/m/d H:i:s", strtotime($output[1])),
-					2 => str_rot13($output[2])
+					0 => $output['name'],
+					1 => date("Y/m/d H:i:s", strtotime($output['time'])),
+					2 => str_rot13($output['content'])
 				];
 				array_push($data, $output);
 			}
@@ -62,6 +57,9 @@
 			 *
 			 * Function : Save message in database
 			 */
+
+			if(empty($content))
+				return false;
 
 			$req = [
 				'Usr'  => $bdd->query('SELECT id, name FROM usr'),
