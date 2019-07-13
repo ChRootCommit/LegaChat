@@ -35,7 +35,11 @@
 				]; $pass = isInput($_POST['password']);
 
 				foreach(service::fetchUsr($bdd) as $arr) {
-					if(($arr['name'] === $post['name']) && ($arr['pass'] === crypto::usrPsw($pass))) {
+					if(
+						($arr['name'] === $post['name'])
+						&& ($arr['pass'] === crypto::usrPsw($pass))
+						&& service::updateSession($bdd, $arr['name'])
+					) {
 						$post['error'] = NULL;
 						$post['passed'] = true;
 						$_SESSION['name'] = $arr['name'];

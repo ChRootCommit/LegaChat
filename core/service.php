@@ -53,7 +53,7 @@
 
 		public static function insert($bdd, $content) {
 			/**
-			 * insert(dataBase, sessionUser, msgContent)
+			 * insert(dataBase, msgContent)
 			 *
 			 * Function : Save message in database
 			 */
@@ -75,9 +75,30 @@
 			return false;
 		}
 
+		public static function updateSession($bdd, $session) {
+			/**
+			 * updateSession(dataBase, sessionUser)
+			 *
+			 * Function : 
+			 */
+
+			$req = [
+				'Usr'    => $bdd->query('SELECT idUsr, name FROM usr'),
+				'Update' => $bdd->prepare('UPDATE usr SET address=? WHERE idUsr=?')
+			];
+
+			while($output = $req['Usr']->fetch(PDO::FETCH_NUM))
+				if($output[1] === $session) {
+					$req['Update']->execute(array($_SERVER['REMOTE_ADDR'], $output[0]));
+					return true;
+				}
+
+			return false;
+		}
+
 		public static function updateUsrPass($bdd, $newPass) {
 			/**
-			 * updateUsrPass(dataBase, sessionUser, newPass)
+			 * updateUsrPass(dataBase, newPass)
 			 *
 			 * Function : Change user password in database
 			 */
@@ -86,12 +107,12 @@
 				return false;
 
 			$req = [
-				'Usr'    => $bdd->query('SELECT name FROM usr'),
-				'Update' => $bdd->prepare('UPDATE usr SET pass=? WHERE name=?')
+				'Usr'    => $bdd->query('SELECT idUsr, name FROM usr'),
+				'Update' => $bdd->prepare('UPDATE usr SET pass=? WHERE idUsr=?')
 			];
 
 			while($output = $req['Usr']->fetch(PDO::FETCH_NUM))
-				if($output[0] === $_SESSION['name']) {
+				if($output[1] === $_SESSION['name']) {
 					$req['Update']->execute(array(crypto::usrPsw($newPass), $output[0]));
 					return true;
 				}
