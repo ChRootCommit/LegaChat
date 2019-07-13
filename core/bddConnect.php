@@ -25,7 +25,7 @@
 			return self::$bdd['db'];
 		}
 
-		private static $bdd = Array(
+		private static $bdd = array(
 			"db" => NULL,
 			"host" => "127.0.0.1",
 			"name" => "legachat",
