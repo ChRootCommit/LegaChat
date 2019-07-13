@@ -43,6 +43,21 @@ class core {
 		$('#chatOutput').append(msg);
 		setTimeout(() => $('#chatOutput').scrollTop($('#chatOutput')[0].scrollHeight), 100);
 	}
+
+	static saveChat(exportObj) {
+		/**
+		 * Save chat output as json file
+		 */
+
+		let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+		let downloadAnchorNode = document.createElement('a');
+
+		downloadAnchorNode.setAttribute("href", dataStr);
+		downloadAnchorNode.setAttribute("download", `LegaChat_${Date.now()}.json`);
+		document.body.appendChild(downloadAnchorNode);
+		downloadAnchorNode.click();
+		downloadAnchorNode.remove();
+	}
 }
 
 /**

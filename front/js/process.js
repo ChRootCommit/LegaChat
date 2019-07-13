@@ -51,6 +51,8 @@ class process {
 			setTimeout(() => $('#chat #chatEntry').animate({ opacity: 1 }, 500), 2000);
 		});
 
+		$('#save').click(() => core.saveChat({ chatContent: data.chatContent }));
+
 		$('#updateUsrPsw').click(function() {
 			$(this).prop('disabled', true);
 			$('#chat #popup').load('./front/views/newPass.html', function() {
@@ -78,7 +80,7 @@ class process {
 			setTimeout(() => document.location.reload(), 500);
 		});
 
-		$('#chatSpeaker').append(data.name);
+		$('#chatSession').append(data.name);
 
 		Object.entries(data.chatContent).forEach(key => {
 			core.generateMsg(key[1], data.name);
