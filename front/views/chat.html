@@ -7,10 +7,16 @@
 	author   : Anarchy
 -->
 <div id="chat">
+	<div id="popup"></div>
 	<aside id="chatHeader">
-		<button id="chatLogOut">
-			<span class="fa fa-power-off"></span>
-		</button>
+		<div class="btnArea">
+			<button id="updateUsrPsw">
+				<span class="fal fa-key"></span>
+			</button>
+			<button id="chatLogOut">
+				<span class="fal fa-power-off"></span>
+			</button>
+		</div>
 		<span class="fas fa-chevron-right"></span>
 		<h1>LegaChat</h1>
 		<h3 id="chatSpeaker">
@@ -20,7 +26,7 @@
 	<aside id="chatOutput"></aside>
 	<aside id="chatEntry">
 		<form>
-			<textarea name="sendContent" placeholder="message..."></textarea>
+			<textarea name="sendContent" placeholder="message..." required></textarea>
 			<button type="submit">
 				<span class="fa fa-paper-plane"></span>
 			</button>
