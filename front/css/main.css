@@ -43,6 +43,50 @@ section {
 	width: 100%;
 }
 
+input {
+	background: transparent;
+	border: none;
+	display: block;
+}
+input::placeholder {
+	color: rgb(255, 17, 17);
+	text-transform: capitalize;
+}
+
+.inputBox {
+	display: block;
+	position: relative;
+}
+
+.inputBox span {
+	font-size: 1.25em;
+	padding: .25em 0;
+	position: absolute;
+	text-align: center;
+	width: 1em;
+}
+
+.inputBox input[type="text"],
+.inputBox input[type="password"] {
+	border-bottom: 2px solid;
+	font-size: 1.25em;
+	font-weight: lighter;
+	height: 1.5em;
+	margin-bottom: 1em;
+	padding: 0 0 .25em 1.5em;
+	width: auto;
+}
+
+.error {
+	color: rgb(217, 17, 17);
+	display: none;
+	left: 0;
+	position: absolute;
+	text-align: center;
+	text-transform: capitalize;
+	width: 100%;
+}
+
 /**
  * END
  */
