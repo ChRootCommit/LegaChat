@@ -98,6 +98,11 @@ $(document).ready(() => {
 	$('title').html(`${title} | Loading_`);
 
 	setTimeout(xhr.index, 1000);
+
+	$(window).resize(function() {
+		clearTimeout(window.resizedFinished);
+		window.resizedFinished = setTimeout(function() { background.grid(); }, 100);
+	});
 });
 
 /**
