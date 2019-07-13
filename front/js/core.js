@@ -8,6 +8,22 @@
  */
 
 class core {
+	static rot13(data) {
+		/**
+		 * Translate rot13 string to lisible string
+		 */
+
+		let rot = {
+			input: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
+			output: 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
+		};
+
+		let index     = x => rot.input.indexOf(x);
+		let translate = x => index(x) > -1 ? rot.output[index(x)] : x;
+
+		return data.split('').map(translate).join('');
+	}
+
 	static charToLink(data) {
 		/**
 		 * Transform string to hypertext link
@@ -37,7 +53,7 @@ class core {
 
 		msg += `<p class="msgOwner">${data[0]}</p>`;
 		msg += `<p class="msgDate">${data[1]}</p>`;
-		msg += `<p class="msgContent">${core.charToLink(data[2])}</p>`;
+		msg += `<p class="msgContent">${core.charToLink(core.rot13(data[2]))}</p>`;
 		msg += '</article>';
 
 		$('#chatOutput').append(msg);
