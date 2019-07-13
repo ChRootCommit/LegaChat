@@ -79,7 +79,7 @@
 			/**
 			 * updateSession(dataBase, sessionUser)
 			 *
-			 * Function : 
+			 * Function : Update time and address connection of user in database
 			 */
 
 			$req = [
