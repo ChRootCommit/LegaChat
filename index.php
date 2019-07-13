@@ -13,7 +13,7 @@
 		 * XHR Request Only
 		 */
 
-		require('./core/controller.php');
+		require_once('./core/controller.php');
 	}
 
 	else {
@@ -21,7 +21,7 @@
 		 * HTTP Request & Other
 		 */
 
-		require('./front/index.html');
+		require_once('./front/index.html');
 	}
 
 	/**
