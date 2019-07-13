@@ -20,7 +20,7 @@
 			 * Function : Encodes a data type for User
 			 */
 
-			$data = md5($data);
+			$data = hash('sha256', $data);
 			$data = str_rot13($data);
 
 			return $data;
