@@ -43,7 +43,7 @@
 				$output = [
 					0 => $output['name'],
 					1 => date("Y/m/d H:i:s", strtotime($output['time'])),
-					2 => crypto::msg($output['content'])
+					2 => $output['content']
 				];
 				array_push($data, $output);
 			}
