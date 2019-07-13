@@ -13,39 +13,20 @@ class process {
 		 * Login resources
 		 */
 
-		$("<link/>", {
-			rel: "stylesheet",
-			type: "text/css",
-			href: "./front/css/login.css"
-		}).appendTo("head");
+		$('#login').fadeIn(() => {
+			setTimeout(() => $('#login h2').animate({ opacity: 1 }, 500), 1000);
+			setTimeout(() => {
+				$('#login .inputBox').animate({ opacity: 1 }, 500);
+				$('#login input[type="submit"]').animate({ opacity: 1 }, 500);
+			}, 1500);
+		});
 
 		$('#login form').submit(e => {
 			e.preventDefault();
 			$("#login form .error").css({ display: 'none' });
 			let post = $("#login form").serialize();
 
-			$.ajax({
-				type: 'POST',
-				url: './?process=login',
-				data: post,
-				dataType: 'json',
-				success: result => {
-					if(result.passed) {
-						$("#login form .error")
-							.css({ color: 'rgb(0, 150, 0)' })
-							.html("connexion...")
-							.fadeIn();
-
-						$("#login form input[type='submit']").prop('disabled', true);
-
-						setTimeout(() => document.location.reload(), 500);
-					} else {
-						$("#login form .error")
-							.html(result.error)
-							.fadeIn();
-					}
-				}
-			});
+			xhr.login(post);
 		});
 
 		setTimeout(loader.close, 1000);
@@ -56,12 +37,6 @@ class process {
 		 * Chat resources
 		 */
 
-		$("<link/>", {
-			rel: "stylesheet",
-			type: "text/css",
-			href: "./front/css/chat.css"
-		}).appendTo("head");
-
 		$("<script></script>", {
 			language: "javascript",
 			type: "text/javascript",
@@ -70,12 +45,36 @@ class process {
 
 		$('title').html(`${title} | Connected_`);
 
-		$('#chatLogOut').click(() => {
-			$.ajax({
-				type: 'POST',
-				url: './?process=logout'
-			});
+		$('#chat').fadeIn(() => {
+			setTimeout(() => $('#chat #chatHeader').animate({ opacity: 1 }, 500), 1000);
+			setTimeout(() => $('#chat #chatOutput').animate({ opacity: 1 }, 500), 1500);
+			setTimeout(() => $('#chat #chatEntry').animate({ opacity: 1 }, 500), 2000);
+		});
 
+		$('#updateUsrPsw').click(function() {
+			$(this).prop('disabled', true);
+			$('#chat #popup').load('./front/views/newPass.html', function() {
+				$(this).find('#popupClose').click(() => {
+					$('#chat #popup').fadeOut();
+					$('#updateUsrPsw').prop('disabled', false);
+				});
+
+				$(this).find('form').submit(function(e) {
+					e.preventDefault();
+					if($(this).find('input[name="password"]').val() === '')
+						return false;
+
+					let post = $(this).serialize();
+					xhr.setPassword(post);
+				});
+
+				$(this).fadeIn();
+			});
+		});
+
+		$('#chatLogOut').click(() => {
+			$('title').html(`${title} | Disconnecting_`);
+			xhr.logout();
 			setTimeout(() => document.location.reload(), 500);
 		});
 
@@ -86,19 +85,14 @@ class process {
 		});
 
 		$('#chat form').submit(e => {
+			e.preventDefault();
 			if($('#chat form textarea').val() === '')
 				return false;
 
-			e.preventDefault();
 			let post = $("#chat form").serialize();
 			$("#chat form")[0].reset();
 
-			$.ajax({
-				type: 'POST',
-				url: './?process=sending',
-				data: post,
-				dataType: 'json'
-			});
+			xhr.sendMsg(post);
 		});
 
 		$('#chat textarea')
@@ -110,33 +104,8 @@ class process {
 			})
 			.focus();
 
-		setTimeout(() => process.chatRefresh(data.chatContent), 200);
+		xhr.refresh(data.chatContent);
 		setTimeout(loader.close, 1000);
-	}
-
-	static chatRefresh(chatContent) {
-		/**
-		 * Refresh Output Area when recieve event
-		 */
-
-		$.ajax({
-			type: 'POST',
-			url: './?process=checking',
-			dataType: 'json',
-			success: result => {
-				let count = [
-					Object.keys(result.chatContent).length,
-					Object.keys(chatContent).length
-				];
-
-				if(count[0] > count[1]) {
-					core.generateMsg(result.chatContent[count[1]], result.name);
-					chatContent = result.chatContent;
-				}
-			}
-		});
-
-		setTimeout(() => process.chatRefresh(chatContent), 1000);
 	}
 }
 

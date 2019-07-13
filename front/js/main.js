@@ -97,24 +97,7 @@ $(document).ready(() => {
 	loader.status('Chargement des ressources');
 	$('title').html(`${title} | Loading_`);
 
-	setTimeout(() => {
-		$.ajax({
-			type: 'POST',
-			url: './?process=checking',
-			dataType: 'json',
-			success: result => {
-				if(result.passed) {
-					loader.status('Chargement des composants du chat');
-					$('title').html(`${title} | Connecting_`);
-					$('section').load('./front/views/chat.html', () => process.chat(result));
-				} else {
-					loader.status('Chargement de la page d\'authentification');
-					$('title').html(`${title} | Authentification_`);
-					$('section').load('./front/views/login.html', process.login);
-				}
-			}
-		});
-	}, 1000);
+	setTimeout(xhr.index, 1000);
 });
 
 /**
