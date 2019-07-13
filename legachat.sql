@@ -29,7 +29,7 @@ CREATE TABLE `usr` (
   `idUsr` int(3) NOT NULL COMMENT '[int]',
   `name` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '[char]',
   `pass` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '[rot13(sha256(char))]',
-	`address` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT '[char]',
+	`address` varchar(40) COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '[char]',
 	`lastConnect` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '[timestamp]'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
