@@ -60,7 +60,7 @@ class core {
 		setTimeout(() => $('#chatOutput').scrollTop($('#chatOutput')[0].scrollHeight), 100);
 	}
 
-	static saveChat(exportObj) {
+	static download(exportObj) {
 		/**
 		 * Save chat output as json file
 		 */

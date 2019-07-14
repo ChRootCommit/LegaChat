@@ -100,6 +100,18 @@ class xhr {
 		});
 	}
 
+	static save() {
+		$.ajax({
+			type: 'POST',
+			url: './?process=checking',
+			dataType: 'json',
+			success: result => {
+				console.log(result.chatContent);
+				core.download({ chatContent: result.chatContent });
+			}
+		});
+	}
+
 	static refresh(chatContent) {
 		/**
 		 * Xhr Refresh Output Area when recieve event Loop Request

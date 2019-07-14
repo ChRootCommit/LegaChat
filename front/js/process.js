@@ -51,7 +51,7 @@ class process {
 			setTimeout(() => $('#chat #chatEntry').animate({ opacity: 1 }, 500), 2000);
 		});
 
-		$('#save').click(() => core.saveChat({ chatContent: data.chatContent }));
+		$('#save').click(xhr.save);
 
 		$('#updateUsrPsw').click(function() {
 			$(this).prop('disabled', true);
