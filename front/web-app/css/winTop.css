@@ -1,3 +1,12 @@
+/**
+ * projet   : LegaChat
+ * version  : 0.1-a
+ * date     : 5/07/2019
+ * file     : winTop.css
+ * location : /front/css/
+ * author   : Anarchy
+ */
+
 .winTop {
   background: rgb(50, 50, 50);
   display: block;
@@ -44,3 +53,7 @@
 	text-shadow: 0 0 4px currentColor;
 }
 .winTop #winTopButtons #winClose:hover { background: rgba(255, 0, 0, .5); }
+
+/**
+ * END
+ */

@@ -1,0 +1,31 @@
+/**
+ * projet   : LegaChat
+ * version  : 0.1-a
+ * date     : 5/07/2019
+ * file     : scrollBar.css
+ * location : /front/css/
+ * author   : Anarchy
+ */
+
+@charset "UTF-8";
+
+::-webkit-scrollbar { background: transparent; }
+::-webkit-scrollbar:vertical { height: 100%; width: 8px; }
+::-webkit-scrollbar:horizontal { height: 8px; width: 100%; }
+
+::-webkit-scrollbar-track-piece {
+	background: transparent;
+	margin: 0;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(20, 20, 20, .3);
+	border-radius: 500px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(20, 20, 20, .4); }
+
+::-webkit-scrollbar-button { height: 0; width: 0; }
+
+/**
+ * END
+ */

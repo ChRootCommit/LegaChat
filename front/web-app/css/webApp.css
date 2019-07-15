@@ -1,8 +1,11 @@
-html {
-  /*background: rgba(20, 20, 20, .2);*/
-  height: 100%;
-  width: 100%;
-}
+/**
+ * projet   : LegaChat
+ * version  : 0.1-a
+ * date     : 5/07/2019
+ * file     : webApp.css
+ * location : /front/css/
+ * author   : Anarchy
+ */
 
 body {
   position: fixed;
@@ -12,7 +15,9 @@ body {
 #loader, #grid { top: 0; }
 
 @media(max-width: 720px) {
-	#chat {
-		top: 2em;
-	}
+	#chat { top: 2em; }
 }
+
+/**
+ * END
+ */

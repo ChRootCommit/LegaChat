@@ -7,6 +7,8 @@
  * author   : Anarchy
  */
 
+@charset "UTF-8";
+
 #login {
 	background: rgba(255, 255, 255, .6);
 	display: none;
