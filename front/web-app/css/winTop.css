@@ -1,0 +1,46 @@
+.winTop {
+  background: rgb(50, 50, 50);
+  display: block;
+  height: 1.5em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+	z-index: 10;
+}
+
+.winTop #winTopDragBar {
+  bottom: 0;
+  height: 90%;
+  left: 1%;
+  position: absolute;
+  right: 6.75em;
+  top: 10%;
+  -webkit-app-region: drag;
+}
+
+.winTop #winTopButtons {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 6.75em;
+  z-index: 1;
+}
+
+.winTop #winTopButtons span {
+  color: rgb(140, 140, 140);
+  height: 1em;
+  padding: .25em .5em;
+  text-align: center;
+	transition: .2s all;
+  vertical-align: middle;
+  width: 1.25em;
+}
+
+.winTop #winTopButtons #winMin:hover,
+.winTop #winTopButtons #winToggle:hover,
+.winTop #winTopButtons #winClose:hover {
+  background: rgba(255, 255, 255, .1);
+  color: rgb(255, 255, 255);
+	text-shadow: 0 0 4px currentColor;
+}
+.winTop #winTopButtons #winClose:hover { background: rgba(255, 0, 0, .5); }

@@ -1,0 +1,18 @@
+html {
+  /*background: rgba(20, 20, 20, .2);*/
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  position: fixed;
+  top: 0;
+}
+
+#loader, #grid { top: 0; }
+
+@media(max-width: 720px) {
+	#chat {
+		top: 2em;
+	}
+}
