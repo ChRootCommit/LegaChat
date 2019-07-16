@@ -14,11 +14,11 @@ class background {
 		if(!ct) var ct = 'light';
 		const theme = {
 			light: {
-				bg: "rgba(255, 255, 255, .15)",
+				bg: "rgba(255, 255, 255, .5)",
 				gd: ["rgba(0, 0, 0, .05)", "rgba(0, 0, 0, .025)"]
 			},
 			dark: {
-				bg: "rgba(0, 0, 0, .15)",
+				bg: "rgba(20, 20, 20, .5)",
 				gd: ["rgba(255, 255, 255, .05)", "rgba(255, 255, 255, .025)"]
 			}
 		}
@@ -52,7 +52,7 @@ class background {
 
 		$(window).resize(function() {
 			clearTimeout(window.resizedFinished);
-			window.resizedFinished = setTimeout(function() { background.grid(); }, 100);
+			window.resizedFinished = setTimeout(function() { background.grid(ct); }, 10);
 		});
 	}
 }
@@ -96,7 +96,7 @@ class loader {
 }
 
 $(document).ready(() => {
-	background.grid();
+	background.grid('dark');
 
 	new loader();
 	loader.status('Chargement des ressources');
