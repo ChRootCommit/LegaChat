@@ -62,6 +62,7 @@ class process {
 				});
 
 				$(this).find('form').submit(function(e) {
+					console.log(this);
 					e.preventDefault();
 					if($(this).find('input[name="password"]').val() === '')
 						return false;
@@ -82,26 +83,24 @@ class process {
 
 		$('#chatSession').append(data.name);
 
-		Object.entries(data.chatContent).forEach(key => {
-			core.generateMsg(key[1], data.name);
-		});
+		Object.entries(data.chatContent).forEach(key => core.generateMsg(key[1], data.name));
 
-		$('#chat form').submit(e => {
+		$('#chat #chatEntry form').submit(function(e) {
 			e.preventDefault();
-			if($('#chat form textarea').val() === '')
+			if($(this).find('textarea').val() === '')
 				return false;
 
 			let post = $("#chat form").serialize();
-			$("#chat form")[0].reset();
+			$(this)[0].reset();
 
 			xhr.sendMsg(post);
 		});
 
-		$('#chat textarea')
+		$('#chat #chatEntry textarea')
 			.keypress(e => {
 				if(e.keyCode === 13) {
-					$('#chat form').submit();
-					setTimeout(() => $("#chat form")[0].reset(), 50);
+					$('#chat #chatEntry form').submit();
+					setTimeout(() => $("#chat #chatEntry form")[0].reset(), 50);
 				}
 			})
 			.focus();
