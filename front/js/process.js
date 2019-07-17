@@ -37,7 +37,11 @@ class process {
 		 * Chat resources
 		 */
 
-		$("<script></script>", {
+		let form = {};
+		$.get('./front/views/addUser.html', content => form.addUser = content);
+		$.get('./front/views/newPass.html', content => form.newPass = content);
+
+		$('<script></script>', {
 			language: "javascript",
 			type: "text/javascript",
 			src: "./front/js/core.js"
@@ -51,18 +55,56 @@ class process {
 			setTimeout(() => $('#chat #chatEntry').animate({ opacity: 1 }, 500), 2000);
 		});
 
+		xhr.isAdmin(() => {
+			$('.btnArea').prepend('<button id="addUser"><span class="fal fa-user-plus"></span></button>');
+			$('#addUser').click(function() {
+				$('#chat #popup').html(function() {
+					$(this)
+						.html(form.addUser)
+						.find('#popupClose').click(() => $('#chat #popup').fadeOut());
+
+					$(this).find('form').submit(function(e) {
+						e.preventDefault();
+						if(
+							!$(this).find('input[name="username"]').val()
+							|| !$(this).find('input[name="password"]').val()
+							|| !$(this).find('input[name="confirm"]').val()
+						)
+							return false;
+
+						if($(this).find('input[name="password"]').val() !== $(this).find('input[name="confirm"]').val()) {
+							$(this)
+								.find('input[name="password"]')
+								.select();
+
+							$(this)
+								.find('.error')
+								.html('different password')
+								.fadeIn();
+
+							return false;
+						}
+
+						let post = $(this).serialize();
+						xhr.addUser(post);
+					});
+
+					$(this).fadeIn(function() {
+						$(this).find('input[name="username"]').focus();
+					});
+				});
+			});
+		});
+
 		$('#save').click(xhr.save);
 
 		$('#updateUsrPsw').click(function() {
-			$(this).prop('disabled', true);
-			$('#chat #popup').load('./front/views/newPass.html', function() {
-				$(this).find('#popupClose').click(() => {
-					$('#chat #popup').fadeOut();
-					$('#updateUsrPsw').prop('disabled', false);
-				});
+			$('#chat #popup').html(function() {
+				$(this)
+					.html(form.newPass)
+					.find('#popupClose').click(() => $('#chat #popup').fadeOut());
 
 				$(this).find('form').submit(function(e) {
-					console.log(this);
 					e.preventDefault();
 					if($(this).find('input[name="password"]').val() === '')
 						return false;
@@ -71,7 +113,9 @@ class process {
 					xhr.setPassword(post);
 				});
 
-				$(this).fadeIn();
+				$(this).fadeIn(function() {
+					$(this).find('input[name="password"]').focus();
+				});
 			});
 		});
 

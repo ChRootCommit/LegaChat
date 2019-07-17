@@ -14,7 +14,7 @@ class xhr {
 		 */
 
 		$.ajax({
-			type: 'POST',
+			type: 'post',
 			url: './?process=checking',
 			dataType: 'json',
 			success: result => {
@@ -37,7 +37,7 @@ class xhr {
 		 */
 
 		$.ajax({
-			type: 'POST',
+			type: 'post',
 			url: './?process=login',
 			data: data,
 			dataType: 'json',
@@ -60,14 +60,55 @@ class xhr {
 		});
 	}
 
+	static isAdmin(func) {
+		$.ajax({
+			type: 'post',
+			url: './?process=isAdmin',
+			dataType: 'json',
+			success: result => {
+				if(result.isAdmin)
+					func();
+			}
+		});
+	}
+
 	static logout() {
 		/**
 		 * Xhr Logout Request
 		 */
 
 		$.ajax({
-			type: 'POST',
+			type: 'post',
 			url: './?process=logout'
+		});
+	}
+
+	static addUser(data) {
+		/**
+		 * Xhr Update User Password
+		 */
+
+		$.ajax({
+			type: 'post',
+			url: './?process=addUser',
+			data: data,
+			dataType: 'json',
+			success: result => {
+				if(result.passed) {
+					$("#popup form .error")
+						.css({ color: 'rgb(0, 150, 0)' })
+						.html('user added')
+						.fadeIn();
+
+					$("#popup form input[type='submit']").prop('disabled', true);
+
+					setTimeout(() => $('#popup #popupClose').click(), 1000);
+				} else {
+					$("#popup form .error")
+						.html('failed')
+						.fadeIn();
+				}
+			}
 		});
 	}
 
@@ -85,7 +126,7 @@ class xhr {
 				if(result.passed) {
 					$("#popup form .error")
 						.css({ color: 'rgb(0, 150, 0)' })
-						.html('success !')
+						.html('password changed')
 						.fadeIn();
 
 					$("#popup form input[type='submit']").prop('disabled', true);
@@ -93,7 +134,7 @@ class xhr {
 					setTimeout(() => $('#popup #popupClose').click(), 1000);
 				} else {
 					$("#popup form .error")
-						.html('failed !')
+						.html('failed')
 						.fadeIn();
 				}
 			}
@@ -102,7 +143,7 @@ class xhr {
 
 	static save() {
 		$.ajax({
-			type: 'POST',
+			type: 'post',
 			url: './?process=checking',
 			dataType: 'json',
 			success: result => {
@@ -118,7 +159,7 @@ class xhr {
 		 */
 
 		$.ajax({
-			type: 'POST',
+			type: 'post',
 			url: './?process=checking',
 			dataType: 'json',
 			success: result => {
@@ -143,7 +184,7 @@ class xhr {
 		 */
 
 		$.ajax({
-			type: 'POST',
+			type: 'post',
 			url: './?process=sending',
 			data: data,
 			dataType: 'json'

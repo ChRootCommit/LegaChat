@@ -13,6 +13,22 @@
 		 * service
 		 */
 
+		public static function fetchUsrAdmin($bdd, $user) {
+			/**
+			 * fetchUsrAdmin(dataBase)
+			 *
+			 * Function : Fetching user permissions
+			 */
+
+			$req = $bdd->query('SELECT name, isAdmin FROM usr');
+
+			while($output = $req->fetch(PDO::FETCH_ASSOC))
+				if(($output['name'] === $user) && $output['isAdmin'])
+					return true;
+
+			return false;
+		}
+
 		public static function fetchUsr($bdd) {
 			/**
 			 * fetchUsr(dataBase)
@@ -27,6 +43,21 @@
 				array_push($data, $output);
 
 			return $data;
+		}
+
+		public static function addUsr($bdd, $newUsr) {
+			/**
+			 * addUsr(dataBase, [dataUser])
+			 *
+			 * Function : Add user in database
+			 */
+
+			$req = $bdd->prepare('INSERT INTO usr(name, pass) VALUES (?, ?)');
+
+			if($req->execute(array($newUsr['usr'], crypto::usrPsw($newUsr['psw']))))
+				return true;
+
+			return false;
 		}
 
 		public static function fetchMsg($bdd) {
@@ -96,9 +127,9 @@
 			return false;
 		}
 
-		public static function updateUsrPass($bdd, $newPass) {
+		public static function updateUsrPsw($bdd, $newPass) {
 			/**
-			 * updateUsrPass(dataBase, newPass)
+			 * updateUsrPsw(dataBase, newPass)
 			 *
 			 * Function : Change user password in database
 			 */

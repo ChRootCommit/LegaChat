@@ -42,12 +42,36 @@
 					) {
 						$post['error'] = NULL;
 						$post['passed'] = true;
-						$_SESSION['name'] = $arr['name'];
+						$_SESSION = [
+							'name'  => $arr['name'],
+							'admin' => service::fetchUsrAdmin($bdd, $arr['name'])
+						];
 					}
 				} break;
 
+			case "addUser": if(isset($_SESSION['name'])) {
+					$newUsrData = [
+						'usr' => isInput($_POST['username']),
+						'psw' => isInput($_POST['password']),
+						'cnf' => isInput($_POST['confirm'])
+					];
+
+					if(
+						($newUsrData['psw'] === $newUsrData['cnf'])
+						&& service::fetchUsrAdmin($bdd, $_SESSION['name'])
+					)
+						$post['passed'] = service::addUsr($bdd, $newUsrData);
+				} break;
+
+			case "isAdmin": if(isset($_SESSION['name'])) {
+					$post = [
+						'isAdmin' => service::fetchUsrAdmin($bdd, $_SESSION['name']),
+						'passed' => true
+					];
+				} break;
+
 			case "setPassword": if(isset($_SESSION['name'])) { // Change user password
-					$post['passed'] = service::updateUsrPass($bdd, isInput($_POST['password']));
+					$post['passed'] = service::updateUsrPsw($bdd, isInput($_POST['password']));
 				} break;
 
 			case "logout": session_destroy(); break; // Logout

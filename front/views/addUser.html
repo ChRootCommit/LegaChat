@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+	projet   : LegaChat
+	version  : 0.1-a
+	date     : 5/07/2019
+	file     : addUser.html
+	author   : Anarchy
+-->
+<div class="btnArea">
+	<button type="button" id="popupClose">
+		<span class="fal fa-times"></span>
+	</button>
+</div>
+<form>
+	<div class="inputBox">
+		<span class="fal fa-user"></span>
+		<input type="text" name="username" maxlength="32" placeholder="username" required />
+	</div>
+	<div class="inputBox">
+		<span class="fal fa-key"></span>
+		<input type="password" name="password" maxlength="64" placeholder="password" required />
+	</div>
+	<div class="inputBox">
+		<input type="password" name="confirm" maxlength="64" placeholder="confirm" required />
+	</div>
+	<p class="error"></p>
+	<input type="submit" value="add" />
+</form>
+<!-- END -->
