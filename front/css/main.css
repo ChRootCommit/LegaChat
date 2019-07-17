@@ -65,22 +65,22 @@ section {
 #login::after, #chat::after, #chat #popup::after {
 	border: 8px solid rgb(217, 17, 17);
 	content: '';
-	height: 1.5em;
+	height: 2em;
 	position: absolute;
-	width: 1.5em;
+	width: 2em;
 }
 #login::before, #chat::before, #chat #popup::before {
-	border-right: 0;
+	border-left: 0;
 	border-top: 0;
 	bottom: 0;
-	left: 0;
-	margin: 0 0 -4px -4px;
+	margin: 0 -4px -4px 0;
+	right: 0;
 }
 #login::after, #chat::after, #chat #popup::after {
 	border-bottom: 0;
-	border-left: 0;
-	margin: -4px -4px 0 0;
-	right: 0;
+	border-right: 0;
+	left: 0;
+	margin: -4px 0 0 -4px;
 	top: 0;
 }
 
