@@ -12,11 +12,11 @@
 	require_once('crypto.php');
 	require_once('service.php');
 
-	function isInput($data) { // Fonction checking input data
+	function isInput($data) { // Function checking input data
 		$data = trim($data);
 		$data = stripslashes($data);
 		$data = htmlspecialchars($data);
-		
+
 		return $data;
 	}
 
@@ -49,7 +49,7 @@
 					}
 				} break;
 
-			case "addUser": if(isset($_SESSION['name'])) {
+			case "addUser": if(isset($_SESSION['name'])) { // Add new user
 					$newUsrData = [
 						'usr' => isInput($_POST['username']),
 						'psw' => isInput($_POST['password']),
@@ -63,15 +63,21 @@
 						$post['passed'] = service::addUsr($bdd, $newUsrData);
 				} break;
 
-			case "isAdmin": if(isset($_SESSION['name'])) {
+			case "isAdmin": if(isset($_SESSION['name'])) { // Checking admin permissions
 					$post = [
 						'isAdmin' => service::fetchUsrAdmin($bdd, $_SESSION['name']),
-						'passed' => true
+						'passed'  => true
 					];
 				} break;
 
 			case "setPassword": if(isset($_SESSION['name'])) { // Change user password
-					$post['passed'] = service::updateUsrPsw($bdd, isInput($_POST['password']));
+					$newData = [
+						'psw' => isInput($_POST['password']),
+						'cnf' => isInput($_POST['confirm']),
+					];
+
+					if($newData['psw'] === $newData['cnf'])
+						$post['passed'] = service::updateUsrPsw($bdd, $newData['psw']);
 				} break;
 
 			case "logout": session_destroy(); break; // Logout

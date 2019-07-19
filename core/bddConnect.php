@@ -26,7 +26,7 @@
 		}
 
 		private static $bdd = array(
-			"db" => NULL,
+			"db"   => NULL,
 			"host" => "127.0.0.1",
 			"name" => "legachat",
 			"char" => "utf8",
