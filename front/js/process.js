@@ -106,8 +106,24 @@ class process {
 
 				$(this).find('form').submit(function(e) {
 					e.preventDefault();
-					if($(this).find('input[name="password"]').val() === '')
+					if(
+						!$(this).find('input[name="password"]').val()
+						|| !$(this).find('input[name="confirm"]').val()
+					)
 						return false;
+
+					if($(this).find('input[name="password"]').val() !== $(this).find('input[name="confirm"]').val()) {
+						$(this)
+							.find('input[name="password"]')
+							.select();
+
+						$(this)
+							.find('.error')
+							.html('different password')
+							.fadeIn();
+
+						return false;
+					}
 
 					let post = $(this).serialize();
 					xhr.setPassword(post);

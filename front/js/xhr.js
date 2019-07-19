@@ -10,7 +10,7 @@
 class xhr {
 	static index() {
 		/**
-		 * Xhr Login Request
+		 * Xhr Index Page Request
 		 */
 
 		$.ajax({
@@ -61,6 +61,10 @@ class xhr {
 	}
 
 	static isAdmin(func) {
+		/**
+		 * Xhr Admin Permissions Checking
+		 */
+
 		$.ajax({
 			type: 'post',
 			url: './?process=isAdmin',
@@ -142,6 +146,10 @@ class xhr {
 	}
 
 	static save() {
+		/**
+		 * Xhr Save Chat Content is a JSON file
+		 */
+
 		$.ajax({
 			type: 'post',
 			url: './?process=checking',
